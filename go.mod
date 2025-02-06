@@ -12,6 +12,8 @@ require (
 )
 
 require (
+	github.com/a-h/respond v0.0.2 // indirect
+	github.com/a-h/rest/examples/offline v0.0.0-20240504113546-6729b3328f85 // indirect
 	github.com/go-openapi/jsonpointer v0.21.0 // indirect
 	github.com/go-openapi/swag v0.23.0 // indirect
 	github.com/invopop/yaml v0.3.1 // indirect

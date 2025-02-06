@@ -145,6 +145,9 @@ func (api *API) createOpenAPI() (spec *openapi3.T, err error) {
 			// Handle description.
 			op.Description = route.Description
 
+			// Handle summary.
+			op.Summary = route.Summary
+
 			// Register the method.
 			path.SetOperation(string(method), op)
 		}

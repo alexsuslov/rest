@@ -30,6 +30,7 @@ func main() {
 		HasResponseModel(http.StatusOK, rest.ModelOf[models.Topic]()).
 		HasResponseModel(http.StatusInternalServerError, rest.ModelOf[respond.Error]()).
 		HasTags([]string{"Topic"}).
+		HasSummary("test summary").
 		HasDescription("Get one topic by id").
 		HasOperationID("getOneTopic")
 

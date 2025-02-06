@@ -1,3 +1,7 @@
+github.com/a-h/respond v0.0.2 h1:mhBwB2XuM+34gfIFs9LuXGfCCbu00rvaCWpTVNHvkPU=
+github.com/a-h/respond v0.0.2/go.mod h1:k9UvuVDWmHAb91OsdrqG0xFv7X+HelBpfMJIn9xMYWM=
+github.com/a-h/rest/examples/offline v0.0.0-20240504113546-6729b3328f85 h1:mN4kFkZZOUiY97DAeh9qalvN56ZqNz/nN7M7upyM2qE=
+github.com/a-h/rest/examples/offline v0.0.0-20240504113546-6729b3328f85/go.mod h1:bdhQQVZazENGFIuSkAs03XWuZilj7ZjGzDgG3EYDAsQ=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/getkin/kin-openapi v0.124.0 h1:VSFNMB9C9rTKBnQ/fpyDU8ytMTr4dWI9QovSKj9kz/M=

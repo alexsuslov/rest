@@ -56,6 +56,8 @@ type Route struct {
 	OperationID string
 	// Description for the route.
 	Description string
+	// Summary for the route.
+	Summary string
 }
 
 // Params is a route parameter.
@@ -300,6 +302,12 @@ func (rm *Route) HasOperationID(operationID string) *Route {
 // HasDescription sets the description for the route.
 func (rm *Route) HasDescription(description string) *Route {
 	rm.Description = description
+	return rm
+}
+
+// HasSummary sets the summary for the route.
+func (rm *Route) HasSummary(summary string) *Route {
+	rm.Summary = summary
 	return rm
 }
 
