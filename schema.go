@@ -192,6 +192,7 @@ func (api *API) getModelName(t reflect.Type) string {
 
 func getSchemaReferenceOrValue(name string, schema *openapi3.Schema) *openapi3.SchemaRef {
 	if shouldBeReferenced(schema) {
+		//
 		return openapi3.NewSchemaRef(fmt.Sprintf("#/components/schemas/%s", name), nil)
 	}
 	return openapi3.NewSchemaRef("", schema)
@@ -329,6 +330,7 @@ func (api *API) RegisterModel(model Model, opts ...ModelOpts) (name string, sche
 			if !f.IsExported() {
 				continue
 			}
+
 			// Get JSON fieldName.
 			jsonTags := strings.Split(f.Tag.Get("json"), ",")
 			fieldName := jsonTags[0]
@@ -341,6 +343,13 @@ func (api *API) RegisterModel(model Model, opts ...ModelOpts) (name string, sche
 			if err != nil {
 				return name, schema, fmt.Errorf("error getting schema for type %q, field %q, failed to get schema for embedded type %q: %w", t, fieldName, f.Type, err)
 			}
+			if s := f.Tag.Get("desc"); s != "" {
+				fieldSchema.Description = s
+			}
+			if s := f.Tag.Get("deprecated"); s != "" {
+				fieldSchema.Deprecated = s == "true"
+			}
+
 			if f.Anonymous {
 				// It's an anonymous type, no need for a reference to it,
 				// since we're copying the fields.
@@ -356,8 +365,15 @@ func (api *API) RegisterModel(model Model, opts ...ModelOpts) (name string, sche
 			}
 			ref := getSchemaReferenceOrValue(fieldSchemaName, fieldSchema)
 			if ref.Value != nil {
-				if ref.Value.Description, ref.Value.Deprecated, err = api.getTypeFieldComment(t.PkgPath(), t.Name(), f.Name); err != nil {
+				Description, Deprecated, err := api.getTypeFieldComment(t.PkgPath(), t.Name(), f.Name)
+				if err != nil {
 					return name, schema, fmt.Errorf("failed to get comments for field %q in type %q: %w", fieldName, name, err)
+				}
+				if ref.Value.Description == "" {
+					ref.Value.Description = Description
+				}
+				if !ref.Value.Deprecated {
+					ref.Value.Deprecated = Deprecated
 				}
 			}
 			schema.Properties[fieldName] = ref

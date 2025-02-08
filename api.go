@@ -276,7 +276,7 @@ func (rm *Route) HasResponseModel(status int, response Model) *Route {
 	return rm
 }
 
-// HasResponseModel configures the request model of the route.
+// HasRequestModel configures the request model of the route.
 // Example:
 //
 //	api.Post("/user").HasRequestModel(http.StatusOK, rest.ModelOf[User]())
