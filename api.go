@@ -57,7 +57,8 @@ type Route struct {
 	// Description for the route.
 	Description string
 	// Summary for the route.
-	Summary string
+	Summary  string
+	Security *openapi3.SecurityRequirements
 }
 
 // Params is a route parameter.
@@ -257,6 +258,15 @@ func (api *API) Trace(pattern string) (r *Route) {
 	return api.Route(http.MethodTrace, pattern)
 }
 
+// HasSecurity configures a response for the route.
+// Example:
+//
+//	api.Get("/user").HasSecurity(openapi3.SecurityRequirement{"hmac": []string{}})
+func (rm *Route) HasSecurity(security openapi3.SecurityRequirements) *Route {
+	rm.Security = &security
+	return rm
+}
+
 // HasResponseModel configures a response for the route.
 // Example:
 //
@@ -357,4 +367,12 @@ func (m Model) ApplyCustomSchema(s *openapi3.Schema) {
 		return
 	}
 	m.s(s)
+}
+
+func (m Model) WithCustomSchema(s *openapi3.Schema) Model {
+	if m.s == nil {
+		return m
+	}
+	m.s(s)
+	return m
 }
