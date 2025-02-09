@@ -174,11 +174,30 @@ func (api *API) createOpenAPI() (spec *openapi3.T, err error) {
 	return spec, err
 }
 
+func (api *API) getModelName1(t reflect.Type) string {
+	pkgPath, typeName := t.PkgPath(), t.Name()
+	if t.Kind() == reflect.Pointer {
+		pkgPath = t.Elem().PkgPath()
+		typeName = t.Elem().Name() + "Ptr"
+	}
+	if t.Kind() == reflect.Map {
+		typeName = fmt.Sprintf("map[%s]%s", t.Key().Name(), t.Elem().Name())
+	}
+	schemaName := api.normalizeTypeName(pkgPath, typeName)
+	if typeName == "" {
+		schemaName = fmt.Sprintf("AnonymousType%d", len(api.models))
+	}
+	return schemaName
+}
+
 func (api *API) getModelName(t reflect.Type) string {
 	pkgPath, typeName := t.PkgPath(), t.Name()
 	if t.Kind() == reflect.Pointer {
 		pkgPath = t.Elem().PkgPath()
 		typeName = t.Elem().Name() + "Ptr"
+	}
+	if api.Prefix != nil {
+		pkgPath = *api.Prefix
 	}
 	if t.Kind() == reflect.Map {
 		typeName = fmt.Sprintf("map[%s]%s", t.Key().Name(), t.Elem().Name())
@@ -266,6 +285,7 @@ func isMarkedAsDeprecated(comment string) bool {
 // RegisterModel allows a model to be registered manually so that additional configuration can be applied.
 // The schema returned can be modified as required.
 func (api *API) RegisterModel(model Model, opts ...ModelOpts) (name string, schema *openapi3.Schema, err error) {
+
 	// Get the name.
 	t := model.Type
 	name = api.getModelName(t)

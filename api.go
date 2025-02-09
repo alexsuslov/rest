@@ -154,6 +154,7 @@ type API struct {
 	// Apply customisation to a specific type by checking the t parameter.
 	// Apply customisations to all types by ignoring the t parameter.
 	ApplyCustomSchemaToType func(t reflect.Type, s *openapi3.Schema)
+	Prefix                  *string
 }
 
 // Merge route data into the existing configuration.
