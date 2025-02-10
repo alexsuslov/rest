@@ -4,17 +4,17 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/a-h/rest/getcomments/parser"
-	"github.com/a-h/rest/getcomments/parser/tests/anonymous"
-	"github.com/a-h/rest/getcomments/parser/tests/chans"
-	"github.com/a-h/rest/getcomments/parser/tests/docs"
-	"github.com/a-h/rest/getcomments/parser/tests/enum"
-	"github.com/a-h/rest/getcomments/parser/tests/functions"
-	"github.com/a-h/rest/getcomments/parser/tests/functiontypes"
-	"github.com/a-h/rest/getcomments/parser/tests/pointers"
-	"github.com/a-h/rest/getcomments/parser/tests/privatetypes"
-	"github.com/a-h/rest/getcomments/parser/tests/publictypes"
 	"github.com/google/go-cmp/cmp"
+	"rest/getcomments/parser"
+	"rest/getcomments/parser/tests/anonymous"
+	"rest/getcomments/parser/tests/chans"
+	"rest/getcomments/parser/tests/docs"
+	"rest/getcomments/parser/tests/enum"
+	"rest/getcomments/parser/tests/functions"
+	"rest/getcomments/parser/tests/functiontypes"
+	"rest/getcomments/parser/tests/pointers"
+	"rest/getcomments/parser/tests/privatetypes"
+	"rest/getcomments/parser/tests/publictypes"
 )
 
 func TestGet(t *testing.T) {

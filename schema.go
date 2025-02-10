@@ -7,9 +7,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/a-h/rest/enums"
-	"github.com/a-h/rest/getcomments/parser"
-	"github.com/getkin/kin-openapi/openapi3"
+	"github.com/alexsuslov/kin-openapi/openapi3"
+	"github.com/alexsuslov/rest/enums"
+	"github.com/alexsuslov/rest/getcomments/parser"
 	"golang.org/x/exp/constraints"
 )
 
@@ -368,6 +368,11 @@ func (api *API) RegisterModel(model Model, opts ...ModelOpts) (name string, sche
 			}
 			if s := f.Tag.Get("deprecated"); s != "" {
 				fieldSchema.Deprecated = s == "true"
+			}
+			// todo: XGoName
+			XGoName := f.Tag.Get("x-go-name")
+			if XGoName != "" {
+				fieldSchema.XGoName = XGoName
 			}
 
 			if f.Anonymous {

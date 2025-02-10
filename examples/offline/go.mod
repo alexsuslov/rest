@@ -1,8 +1,8 @@
 module github.com/a-h/rest/examples/offline
 
-go 1.21
+go 1.23.4
 
-toolchain go1.22.2
+toolchain go1.23.6
 
 replace github.com/a-h/rest v0.0.0 => ../../
 

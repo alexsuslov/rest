@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/getkin/kin-openapi/openapi3"
+	"github.com/alexsuslov/kin-openapi/openapi3"
 )
 
 type APIOpts func(*API)
