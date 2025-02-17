@@ -9,7 +9,7 @@ replace github.com/a-h/rest v0.0.0 => ../../
 require (
 	github.com/a-h/respond v0.0.2
 	github.com/a-h/rest v0.0.0
-	github.com/getkin/kin-openapi v0.124.0
+	github.com/getkin/kin-openapi v0.129.0
 	github.com/go-chi/chi/v5 v5.0.12
 )
 
