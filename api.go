@@ -203,6 +203,7 @@ func (api *API) Route(method, pattern string) (r *Route) {
 			Pattern: Pattern(pattern),
 			Models: Models{
 				Responses: make(map[int]Model),
+				MediaType: make(map[int]string),
 			},
 			Params: Params{
 				Path:  make(map[string]PathParam),
@@ -272,8 +273,11 @@ func (rm *Route) HasSecurity(security openapi3.SecurityRequirements) *Route {
 // Example:
 //
 //	api.Get("/user").HasResponseModel(http.StatusOK, rest.ModelOf[User]())
-func (rm *Route) HasResponseModel(status int, response Model) *Route {
+func (rm *Route) HasResponseModel(status int, response Model, params ...string) *Route {
 	rm.Models.Responses[status] = response
+	if len(params) == 1 {
+		rm.Models.MediaType[status] = params[0]
+	}
 	return rm
 }
 
@@ -326,6 +330,7 @@ func (rm *Route) HasSummary(summary string) *Route {
 type Models struct {
 	Request   Model
 	Responses map[int]Model
+	MediaType map[int]string
 }
 
 // ModelOf creates a model of type T.

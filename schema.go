@@ -126,10 +126,15 @@ func (api *API) createOpenAPI() (spec *openapi3.T, err error) {
 				if err != nil {
 					return spec, err
 				}
+				MediaType := "application/json"
+				if tmp, ok := route.Models.MediaType[status]; ok {
+					MediaType = tmp
+				}
+
 				resp := openapi3.NewResponse().
 					WithDescription("").
 					WithContent(map[string]*openapi3.MediaType{
-						"application/json": {
+						MediaType: {
 							Schema: getSchemaReferenceOrValue(name, schema),
 						},
 					})
